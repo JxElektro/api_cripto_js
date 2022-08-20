@@ -23,28 +23,28 @@
     <div class="container__main">
       <form action="" id="form"></form>
       <select id="coin" required>
-        <option disabled selected> Seleciona tu Moneda</option>
-        <option value="USD"> ($) Dolar</option>
-        <option value="EUR"> (€) Euro</option>
-        <option value="GBP"> (£) Libra Esterlina </option>
-        <option value="CLP"> ($) Peso Chileno</option>
+        <option value="0" disabled  selected id="error1"> Seleciona tu Moneda</option>
+        <option value="USD" id="USD"> ($) Dolar</option>
+        <option value="EUR" id="EUR"> (€) Euro</option>
+        <option value="GBP" id="GBP"> (£) Libra Esterlina </option>
+        <option value="CLP" id="CLP"> ($) Peso Chileno</option>
       </select>
       <select id="crypto" required>
-        <option disabled selected> Seleciona tu Criptomoneda</option>
-        <option value="BTC"> (₿) Bitcon</option>
-        <option value="ETH"> (Ξ) Ethereum</option>
-        <option value="USDT"> (USDT) Tether</option>
-        <option value="USDC"> (USDC) USD Coin</option>
-        <option value="CLP"> (BNB) Binance Coin</option>
-        <option value="XRP"> (XRP) XRP</option>
-        <option value="SOL"> (SOL) Solana</option>
-        <option value="BUSD"> (BUSD) Binance USD</option>
-        <option value="ADA"> (ADA) Cardano</option>
-        <option value="DOGE"> (Ð) Dogecoin</option>
+        <option value="0" disabled selected  id="error2"> Seleciona tu Criptomoneda</option>
+        <option value="BTC" id="BTC"> (₿) Bitcon</option>
+        <option value="ETH" id="ETH"> (Ξ) Ethereum</option>
+        <option value="USDT" id="USDT"> (USDT) Tether</option>
+        <option value="USDC" id="USDC"> (USDC) USD Coin</option>
+        <option value="BNB" id="BNB"> (BNB) Binance Coin</option>
+        <option value="XRP" id="XRP"> (XRP) XRP</option>
+        <option value="SOL" id="SOL"> (SOL) Solana</option>
+        <option value="BUSD" id="BUSD"> (BUSD) Binance USD</option>
+        <option value="ADA" id="ADA"> (ADA) Cardano</option>
+        <option value="DOGE" id="DOGE"> (Ð) Dogecoin</option>
       </select>
       <br>
       <span class="icon"><i class="fa fa-search"></i></span>
-      <input type="submit" class="btn" value="Cotizar">
+      <input type="submit" class="btn" id="btn" value="Cotizar">
 
     </div>
 
