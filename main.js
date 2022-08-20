@@ -12,25 +12,26 @@ let result = null;
 
 // comentar apropiadamente
 
-button.addEventListener("click", (e) => { 
-  e.preventDefault();                     
-  if ($COIN.value == error1.value || $CRYPTO.value === error2.value) { 
-    errorSelect() 
+button.addEventListener("click", (e) => {
+  e.preventDefault();
+  if ($COIN.value == error1.value || $CRYPTO.value === error2.value) {
+    errorSelect()
     return;
-  } else {    
+  } else {
     callApi();
   };
 });
 
-function errorSelect() {    
+function errorSelect() {
   let errRed = "<h4>Debe llenar todos los campos</h4>"
   document.getElementById("container__end").innerHTML = errRed
 }
 
-function callApi() { 
+function callApi() {
   let url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${$CRYPTO.value}&tsyms=${$COIN.value}&api_key=${$KEY}`
-  console.log("Buscando..")
+  let buscando = "<h2>Buscando..</h2>"
 
+  document.getElementById("container__end").innerHTML = buscando
   // insertar spinner
 
   axios.get(url)
@@ -42,21 +43,18 @@ function callApi() {
         display = display[prop]
       for (prop2 in display)
         obj = display[prop2]
-      let price = obj.PRICE;
+
+      let price = (obj.PRICE);
       let fromSymbol = obj.FROMSYMBOL;
       let tosSymbol = obj.TOSYMBOL;
       let lastUpdate = obj.LASTUPDATE;
       let change24 = obj.CHANGEPCT24HOUR;
       let maxDaily = obj.HIGH24HOUR;
       let minDaily = obj.LOW24HOUR;
-
       let icon = obj.IMAGEURL;
-      let img = `<img src="${urlCC}${icon}">`; 
-// cambiar por equivalente dolar
+      let img = `<img src="${urlCC}${icon}">`;
+      let result = `Precio: <h3>${price}</h3><li>Max Diario: ${maxDaily}</li><li>Min Diario: ${minDaily}</li><li>Variacion 24H: %${change24}<li>Actualizado: ${lastUpdate}</li> `;
 
-      let result = `Precio: <h3>${price}</h3> <li>${fromSymbol}1 = ${price}</li><li>Max Diario: ${maxDaily}</li><li>Min Diario: ${minDaily}</li><li>Variacion 24H: %${change24}<li>Ultima Actualizacion: ${lastUpdate}</li> `;
-
-    
       document.getElementById("inner-skew").innerHTML = img
       document.getElementById("container__end").innerHTML = result
     })
