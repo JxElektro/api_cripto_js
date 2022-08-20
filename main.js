@@ -1,3 +1,4 @@
+/* Variables */
 const $KEY = "1c2338a8aa5389dcd033f6dc2bfb54fdde97a7810f7d8448dc7d92a2b702fdf7";
 let $CRYPTO = document.getElementById("crypto");
 let $COIN = document.getElementById("coin");
@@ -8,9 +9,7 @@ let error2 = document.getElementById("error2");
 let urlCC = "https://www.cryptocompare.com/";
 let result = null;
 
-
-
-// comentar apropiadamente
+// Call Button
 
 button.addEventListener("click", (e) => {
   e.preventDefault();
@@ -23,16 +22,16 @@ button.addEventListener("click", (e) => {
 });
 
 function errorSelect() {
-  let errRed = "<h4>Debe llenar todos los campos</h4>"
-  document.getElementById("container__end").innerHTML = errRed
+  let errRed = "<h4>Debe llenar todos los campos</h4>";
+  document.getElementById("container__end").innerHTML = errRed;
 }
 
 function callApi() {
-  let url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${$CRYPTO.value}&tsyms=${$COIN.value}&api_key=${$KEY}`
-  let buscando = "<h2>Buscando..</h2>"
+  let url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${$CRYPTO.value}&tsyms=${$COIN.value}&api_key=${$KEY}`;
+  let search = "<h3>Buscando..</h3>";
+  document.getElementById("container__end").innerHTML = search;
 
-  document.getElementById("container__end").innerHTML = buscando
-  // insertar spinner
+// CALL API
 
   axios.get(url)
     .then(response => {
@@ -45,8 +44,6 @@ function callApi() {
         obj = display[prop2]
 
       let price = (obj.PRICE);
-      let fromSymbol = obj.FROMSYMBOL;
-      let tosSymbol = obj.TOSYMBOL;
       let lastUpdate = obj.LASTUPDATE;
       let change24 = obj.CHANGEPCT24HOUR;
       let maxDaily = obj.HIGH24HOUR;
@@ -62,5 +59,4 @@ function callApi() {
       // Podemos mostrar los errores en la consola
       console.log(e);
     })
-
 }
