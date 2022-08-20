@@ -10,6 +10,9 @@ let urlCC = "https://www.cryptocompare.com/";
 let result = null;
 
 // Call Button
+
+
+
 button.addEventListener("click", (e) => {
   e.preventDefault();
   if ($COIN.value == error1.value || $CRYPTO.value === error2.value) {
@@ -31,6 +34,7 @@ function callApi() {
   document.getElementById("container__end").innerHTML = search;
 
 // CALL API
+
   axios.get(url)
     .then(response => {
       this.users = response.data;
@@ -50,10 +54,11 @@ function callApi() {
       let img = `<img src="${urlCC}${icon}">`;
       let result = `Precio: <h3>${price}</h3><li>Max Diario: ${maxDaily}</li><li>Min Diario: ${minDaily}</li><li>Variacion 24H: %${change24}<li>Actualizado: ${lastUpdate}</li> `;
 
-      document.getElementById("inner-img").innerHTML = img
+      document.getElementById("inner-skew").innerHTML = img
       document.getElementById("container__end").innerHTML = result
     })
     .catch(e => {
+      // Podemos mostrar los errores en la consola
       console.log(e);
     })
 }
