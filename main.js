@@ -34,12 +34,17 @@ function callApi() { // FUNTION DE API
     .then(response => {
       this.users = response.data;
       let display = response.data.DISPLAY
-      console.log(display)
-      let prop
+      let obj1 = null
       for (prop in display)
-      console.log(display[prop])
-     
-console.log(prop)
+        display = display[prop]
+      for (prop2 in display)
+      obj1 = display[prop2]
+      console.log(obj1)
+      console.log(obj1.PRICE)
+      console.log(obj1.FROMSYMBOL)
+      console.log(obj1.TOSYMBOL)
+      console.log(obj1.LASTUPDATE)
+      
       //let icon = response.data.weather[0].icon
       //let dato = response.data.weather[0].description
       //let result = `<h1>${response.data.name}</h1><li>${response.data.weather[0].description}</li><br><li>Temperatura:<h2>${Math.floor((response.data.main.temp))}°<h2></li><li>Min: ${Math.floor(response.data.main.temp_min)}°</li><li>Max: ${Math.floor(response.data.main.temp_max)}°</li>`
