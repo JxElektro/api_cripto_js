@@ -1,34 +1,37 @@
 const $KEY = "1c2338a8aa5389dcd033f6dc2bfb54fdde97a7810f7d8448dc7d92a2b702fdf7";
 let $CRYPTO = document.getElementById("crypto");
 let $COIN = document.getElementById("coin");
-let button = document.getElementById("btn")
-let error = "<h3>Debe Seleccionar ambas opciones para cotizar</h3>"
-let error1 = document.getElementById("error1")
-let error2 = document.getElementById("error2")
-let UrlCC = "https://www.cryptocompare.com/"
+let button = document.getElementById("btn");
+let error = "<h3>Debe Seleccionar ambas opciones para cotizar</h3>";
+let error1 = document.getElementById("error1");
+let error2 = document.getElementById("error2");
+let urlCC = "https://www.cryptocompare.com/";
+let result = null;
 
 
-button.addEventListener("click", (e) => { // INICIA EL BOTON
-  e.preventDefault()                     // PREVIENE EL REFRESH
-  if ($COIN.value == error1.value || $CRYPTO.value === error2.value) { // EVITA CAMPOS VACIOS
-    errorSelect() // LLAMA ERROR DE CAMPO VACIO
-    return
-  } else {    //LLAMA A LA API SI LOS CMAPOS ESTAN LLENOS
-    callApi()
-  }
+
+// comentar apropiadamente
+
+button.addEventListener("click", (e) => { 
+  e.preventDefault();                     
+  if ($COIN.value == error1.value || $CRYPTO.value === error2.value) { 
+    errorSelect() 
+    return;
+  } else {    
+    callApi();
+  };
 });
 
-
-function errorSelect() {    // FUNCTION DE CAMPOS VACIOS
-  console.log("Debe Seleccionar ambas opciones para cotizar");
-  // Aqui presentar el mensaje de error
+function errorSelect() {    
+  let errRed = "<h4>Debe llenar todos los campos</h4>"
+  document.getElementById("container__end").innerHTML = errRed
 }
 
-function callApi() { // FUNTION DE API
-
-
+function callApi() { 
   let url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${$CRYPTO.value}&tsyms=${$COIN.value}&api_key=${$KEY}`
   console.log("Buscando..")
+
+  // insertar spinner
 
   axios.get(url)
     .then(response => {
@@ -38,23 +41,24 @@ function callApi() { // FUNTION DE API
       for (prop in display)
         display = display[prop]
       for (prop2 in display)
-      obj = display[prop2]
-      console.log(obj)
-      let price =obj.PRICE;
+        obj = display[prop2]
+      let price = obj.PRICE;
       let fromSymbol = obj.FROMSYMBOL;
       let tosSymbol = obj.TOSYMBOL;
       let lastUpdate = obj.LASTUPDATE;
+      let change24 = obj.CHANGEPCT24HOUR;
+      let maxDaily = obj.HIGH24HOUR;
+      let minDaily = obj.LOW24HOUR;
+
       let icon = obj.IMAGEURL;
-      console.log(icon)
+      let img = `<img src="${urlCC}${icon}">`; 
+// cambiar por equivalente dolar
 
+      let result = `Precio: <h3>${price}</h3> <li>${fromSymbol}1 = ${price}</li><li>Max Diario: ${maxDaily}</li><li>Min Diario: ${minDaily}</li><li>Variacion 24H: %${change24}<li>Ultima Actualizacion: ${lastUpdate}</li> `;
 
-
-      //let icon = response.data.weather[0].icon
-      //let dato = response.data.weather[0].description
-      //let result = `<h1>${response.data.name}</h1><li>${response.data.weather[0].description}</li><br><li>Temperatura:<h2>${Math.floor((response.data.main.temp))}°<h2></li><li>Min: ${Math.floor(response.data.main.temp_min)}°</li><li>Max: ${Math.floor(response.data.main.temp_max)}°</li>`
-      //let img = `<img src="http://openweathermap.org/img/wn/${icon}@2x.png">`
-      //document.getElementById("container").innerHTML = result
-      //document.getElementById("inner-skew").innerHTML = img
+    
+      document.getElementById("inner-skew").innerHTML = img
+      document.getElementById("container__end").innerHTML = result
     })
     .catch(e => {
       // Podemos mostrar los errores en la consola
@@ -62,5 +66,3 @@ function callApi() { // FUNTION DE API
     })
 
 }
-
-/*let busqueda = document.getElementById("search")*/
